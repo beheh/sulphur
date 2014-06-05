@@ -15,7 +15,7 @@ class ResponseFactory {
 	public static function fromUrl($url) {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_USERAGENT, __NAMESPACE__.'/1.0');
+		curl_setopt($ch, CURLOPT_USERAGENT, __NAMESPACE__.'/0.1.5');
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		$string = curl_exec($ch);
