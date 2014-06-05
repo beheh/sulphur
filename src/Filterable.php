@@ -7,7 +7,7 @@ namespace Sulphur;
  */
 class Filterable {
 
-	private $fields;
+	protected $fields;
 
 	public function __construct($fields) {
 		$this->fields = $fields;

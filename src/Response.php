@@ -11,6 +11,7 @@ class Response {
 
 	public function __construct($response) {
 
+		// normalize line endings
 		$response = str_replace(array("\r\n", "\r"), "\n", $response);
 		$response = preg_replace("/\n{2,}/", "\n", $response);
 
@@ -52,6 +53,10 @@ class Response {
 
 	public function where($field) {
 		return new FilterableList($this->references, $field);
+	}
+	
+	public function all() {
+		return $this->where(null);
 	}
 
 }
