@@ -38,7 +38,7 @@ class FilterableList implements \IteratorAggregate, \ArrayAccess, \Countable {
 
 	/**
 	 * Sets the field for the next filter.
-	 * @param type $field the field to filter on
+	 * @param string $field the field to filter on
 	 */
 	public function where($field) {
 		$this->field = $field;

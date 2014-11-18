@@ -35,12 +35,12 @@ class Filterable {
 	}
 
 	public function doesNotContain($field, $needle, $ignore_case = false) {
-		return !$this->contains($field, $value);
+		return !$this->contains($field, $needle, $ignore_case);
 	}
 
 	public function matches($field, $expression) {
 		if(isset($this->fields[$field])) {
-			return preg_match($expression, $this->fields[$field]);
+			return (bool) preg_match($expression, $this->fields[$field]);
 		}
 		return false;
 	}
