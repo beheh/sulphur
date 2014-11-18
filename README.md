@@ -1,4 +1,4 @@
-Sulphur
+Sulphur [![Build Status](https://travis-ci.org/beheh/sulphur.svg?branch=master)](https://travis-ci.org/beheh/sulphur)
 =======
 
 A self-contained library to parse and filter data from the
