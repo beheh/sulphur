@@ -22,6 +22,9 @@ Basic usage
 // fetch masterserver response
 $response = Sulphur\ResponseFactory::fromUrl('example.com:80');
 
+// count all running games
+echo count($response->where('State')->is('Running')).' game(s) are currently running to join.';
+
 // iterate through all games currently in lobby
 foreach($response->where('State')->is('Lobby') as $reference) {
     echo $reference->Title.' is now open!';
@@ -53,14 +56,6 @@ the reference object:
 
 The calls return an object which should handle like an array.
 
-### Fields ###
-
-You can read from fields simply by accessing the corresponding local
-variables.
-
-    $reference->Title;
-    $reference->Game;
-
 ### Filtering ###
 
 Responses can be filtered in multiple ways:
@@ -81,6 +76,15 @@ Inverse filtering is also available:
 
 ### Chain filtering ###
 
-You can filter by multiple fields by repeating calls to `where`.
+You can filter multiple fields by repeating calls to `where`.
 
     $response->where('State')->is('Running')->where('League')->exists();
+    $response->where('State')->is('Lobby')->where('Password')->doesNotExist();
+
+### Fields ###
+
+Fields can be read simply by accessing the corresponding local
+variables (case-sensitive!).
+
+    $reference->Title;
+    $reference->Game;
