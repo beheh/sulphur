@@ -23,7 +23,7 @@ Basic usage
 $response = Sulphur\ResponseFactory::fromUrl('example.com:80');
 
 // count all running games
-echo count($response->where('State')->is('Running')).' game(s) are currently running to join.';
+echo count($response->where('State')->is('Running')).' game(s) are currently running.';
 
 // iterate through all games currently in lobby
 foreach($response->where('State')->is('Lobby') as $reference) {
