@@ -1,22 +1,20 @@
-Sulphur [![Build Status](https://travis-ci.org/beheh/sulphur.svg?branch=master)](https://travis-ci.org/beheh/sulphur)
-=======
+# Sulphur
 
-A self-contained library to parse and filter data from the
-Clonk masterserver protocol, as used in the games Clonk Rage
-(http://clonk.de) and OpenClonk (http://openclonk.org).
+[![Build Status](https://travis-ci.org/beheh/sulphur.svg?branch=master)](https://travis-ci.org/beheh/sulphur)
+[![License](https://img.shields.io/packagist/l/beheh/sulphur.svg)](https://packagist.org/packages/beheh/sulphur)
+
+A self-contained library to parse and filter data from the Clonk masterserver protocol, as used in the games Clonk Rage (http://clonk.de) and OpenClonk (http://openclonk.org).
 
 This library is licensed under the MIT license.
 
 
-Installing
-----------
+## Installing
 
 Install Sulphur by using composer.
 
     $ composer require beheh/sulphur
 
-Basic usage
------------
+## Basic usage
 
 ```php
 // fetch masterserver response
@@ -40,13 +38,11 @@ $references = $response->where('State')->is('Running')
 echo $references[0]->Title;
 ```
 
-Game references
-----------
+## Game references
 
-Game sessions are tracked as game references. They can have a
-variety of fields which describe something about the game.
+Game sessions are tracked as game references. They can have a variety of fields which describe something about the game.
 
-### Access ###
+### Access
 
 To access references, simply call the corresponding functions in
 the reference object:
@@ -56,7 +52,7 @@ the reference object:
 
 The calls return an object which should handle like an array.
 
-### Filtering ###
+### Filtering
 
 Responses can be filtered in multiple ways:
 
@@ -74,17 +70,16 @@ Inverse filtering is also available:
     $response->where('Comment')->doesNotContains('bad', true); // case insensitive
     $response->where('Version')->doesNotMatch('/5(,[0-9]+){3}/');
 
-### Chain filtering ###
+### Chain filtering
 
 You can filter multiple fields by repeating calls to `where`.
 
     $response->where('State')->is('Running')->where('League')->exists();
     $response->where('State')->is('Lobby')->where('Password')->doesNotExist();
 
-### Fields ###
+### Fields
 
-Fields can be read simply by accessing the corresponding local
-variables (case-sensitive!).
+Fields can be read simply by accessing the corresponding local variables (case-sensitive!).
 
     $reference->Title;
     $reference->Game;
