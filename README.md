@@ -12,7 +12,9 @@ This library is licensed under the MIT license.
 
 Install Sulphur by using [composer](https://getcomposer.org/).
 
-    $ composer require beheh/sulphur
+```bash
+$ composer require beheh/sulphur
+```
 
 ## Basic usage
 
@@ -47,8 +49,10 @@ Game sessions are tracked as game references. They can have a variety of fields 
 To access references, simply call the corresponding functions in
 the reference object:
 
-    $references = $response->all();
-    $references = $response->where('Title')->is('Clepal');
+```php
+$references = $response->all();
+$references = $response->where('Title')->is('Clepal');
+```
 
 The calls return an object which should handle like an array.
 
@@ -56,21 +60,25 @@ The calls return an object which should handle like an array.
 
 Responses can be filtered in multiple ways:
 
-    $response->where('State')->is('Lobby');
-    $response->where('League')->exists();
-    $response->where('Comment')->contains('friendly');
-    $response->where('Comment')->contains('friendly', true); // case insensitive
-    $response->where('Version')->matches('/4(,[0-9]+){3}/');
-	$response->where('Title')->passes(function($field, $value) { return strlen($value) > 5; });
+```php
+$response->where('State')->is('Lobby');
+$response->where('League')->exists();
+$response->where('Comment')->contains('friendly');
+$response->where('Comment')->contains('friendly', true); // case insensitive
+$response->where('Version')->matches('/4(,[0-9]+){3}/');
+$response->where('Title')->passes(function($field, $value) { return strlen($value) > 5; });
+```
 
 Inverse filtering is also available:
 
-    $response->where('State')->isNot('Running');
-    $response->where('League')->doesNotExist();
-    $response->where('Comment')->doesNotContain('bad');
-    $response->where('Comment')->doesNotContains('bad', true); // case insensitive
-    $response->where('Version')->doesNotMatch('/5(,[0-9]+){3}/');
-	$response->where('Title')->doesNotPass(function($field, $value) { return strlen($value) <= 3; });
+```php
+$response->where('State')->isNot('Running');
+$response->where('League')->doesNotExist();
+$response->where('Comment')->doesNotContain('bad');
+$response->where('Comment')->doesNotContains('bad', true); // case insensitive
+$response->where('Version')->doesNotMatch('/5(,[0-9]+){3}/');
+$response->where('Title')->doesNotPass(function($field, $value) { return strlen($value) <= 3; });
+```
 
 The `passes` and `doesNotPass` methods accept any callable accepted by call_user_func.
 
@@ -78,12 +86,16 @@ The `passes` and `doesNotPass` methods accept any callable accepted by call_user
 
 You can filter multiple fields by repeating calls to `where`.
 
-    $response->where('State')->is('Running')->where('League')->exists();
-    $response->where('State')->is('Lobby')->where('Password')->doesNotExist();
+```php
+$response->where('State')->is('Running')->where('League')->exists();
+$response->where('State')->is('Lobby')->where('Password')->doesNotExist();
+```
 
 ### Fields
 
 Fields can be read simply by accessing the corresponding local variables (case-sensitive!).
 
-    $reference->Title;
-    $reference->Game;
+```php
+$reference->Title;
+$reference->Game;
+```
