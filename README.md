@@ -66,7 +66,6 @@ $response->where('League')->exists();
 $response->where('Comment')->contains('friendly');
 $response->where('Comment')->contains('friendly', true); // case insensitive
 $response->where('Version')->matches('/4(,[0-9]+){3}/');
-$response->where('Title')->passes(function($field, $value) { return strlen($value) > 5; });
 ```
 
 Inverse filtering is also available:
@@ -77,10 +76,14 @@ $response->where('League')->doesNotExist();
 $response->where('Comment')->doesNotContain('bad');
 $response->where('Comment')->doesNotContains('bad', true); // case insensitive
 $response->where('Version')->doesNotMatch('/5(,[0-9]+){3}/');
-$response->where('Title')->doesNotPass(function($field, $value) { return strlen($value) <= 3; });
 ```
 
-The `passes` and `doesNotPass` methods accept any callable accepted by call_user_func.
+You can also use custom callbacks (anything accepted by call_user_func):
+
+```php
+$response->where('Title')->passes(function($field, $value) { return strlen($value) > 5; });
+$response->where('Title')->doesNotPass(function($field, $value) { return strlen($value) <= 3; });
+```
 
 ### Chain filtering
 
