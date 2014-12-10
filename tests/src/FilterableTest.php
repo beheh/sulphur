@@ -115,6 +115,34 @@ class FilterableTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @covers Sulphur\Filterable::passes
+	 */
+	public function testPasses() {
+		$this->assertTrue($this->filterable->passes('Title', function($field, $value) { return strlen($value) > 5; }));
+		$this->assertTrue($this->filterable->passes('Title', function($field, $value) { return $field === 'Title'; }));
+		$this->assertTrue($this->filterable->passes('Icon', function($field, $value) { return $value === 12; }));
+		$this->assertTrue($this->filterable->passes('foo', function($field, $value) { return $value === null; }));
+		$this->assertFalse($this->filterable->passes('Title', function($field, $value) { return strlen($value) <= 3; }));
+		$this->assertFalse($this->filterable->passes('Title', function($field, $value) { return $field === 'State'; }));
+		$this->assertFalse($this->filterable->passes('Icon', function($field, $value) { return $value === '12'; }));
+		$this->assertFalse($this->filterable->passes('foo', function($field, $value) { return $value !== null; }));
+	}
+
+	/**
+	 * @covers Sulphur\Filterable::doesNotPass
+	 */
+	public function testDoesNotPass() {
+		$this->assertTrue($this->filterable->doesNotPass('Title', function($field, $value) { return strlen($value) <= 3; }));
+		$this->assertTrue($this->filterable->doesNotPass('Title', function($field, $value) { return $field === 'State'; }));
+		$this->assertTrue($this->filterable->doesNotPass('Icon', function($field, $value) { return $value === '12'; }));
+		$this->assertTrue($this->filterable->doesNotPass('foo', function($field, $value) { return $value !== null; }));
+		$this->assertFalse($this->filterable->doesNotPass('Title', function($field, $value) { return strlen($value) > 5; }));
+		$this->assertFalse($this->filterable->doesNotPass('Title', function($field, $value) { return $field === 'Title'; }));
+		$this->assertFalse($this->filterable->doesNotPass('Icon', function($field, $value) { return $value === 12; }));
+		$this->assertFalse($this->filterable->doesNotPass('foo', function($field, $value) { return $value === null; }));
+	}
+
+	/**
 	 * @covers Sulphur\Filterable::__get
 	 */
 	public function test__get() {

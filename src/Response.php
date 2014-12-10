@@ -32,9 +32,10 @@ class Response {
 				continue;
 			}
 			$matches = array();
-			if(preg_match('/^\[(.*)\]$/', $line, $matches)) {
+			if(preg_match('/^(\s)*\[(.*)\]$/', $line, $matches)) {
+				$depth = strlen($matches[1]);
 				// heading, like "[Reference]"
-				switch($matches[1]) {
+				switch($matches[2]) {
 					case 'Reference':
 						$heading = false;
 						if(!empty($reference)) {

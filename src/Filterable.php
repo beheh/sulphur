@@ -56,6 +56,18 @@ class Filterable {
 	public function doesNotExist($field) {
 		return !$this->exists($field);
 	}
+	
+	public function passes($field, callable $callable) {
+		$value = null;
+		if(isset($this->fields[$field])) {
+			$value = $this->fields[$field];
+		}
+		return call_user_func($callable, $field, $value);
+	}
+	
+	public function doesNotPass($field, callable $callable) {
+		return !$this->passes($field, $callable);
+	}
 
 	public function __get($name) {
 		if(isset($this->fields[$name])) {
