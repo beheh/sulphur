@@ -10,7 +10,7 @@ This library is licensed under the MIT license.
 
 ## Installing
 
-Install Sulphur by using composer.
+Install Sulphur by using [composer](https://getcomposer.org/).
 
     $ composer require beheh/sulphur
 
@@ -61,6 +61,7 @@ Responses can be filtered in multiple ways:
     $response->where('Comment')->contains('friendly');
     $response->where('Comment')->contains('friendly', true); // case insensitive
     $response->where('Version')->matches('/4(,[0-9]+){3}/');
+	$response->where('Title')->passes(function($field, $value) { return strlen($value) > 5; });
 
 Inverse filtering is also available:
 
@@ -69,6 +70,9 @@ Inverse filtering is also available:
     $response->where('Comment')->doesNotContain('bad');
     $response->where('Comment')->doesNotContains('bad', true); // case insensitive
     $response->where('Version')->doesNotMatch('/5(,[0-9]+){3}/');
+	$response->where('Title')->doesNotPass(function($field, $value) { return strlen($value) <= 3; });
+
+The `passes` and `doesNotPass` methods accept any callable accepted by call_user_func.
 
 ### Chain filtering
 
