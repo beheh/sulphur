@@ -36,8 +36,12 @@ echo $references[0]->Comment;
 
 // show title of first running league game
 $references = $response->where('State')->is('Running')
-                       ->where('League')->exists();
+                       ->where('League')->doesNotExist();
 echo $references[0]->Title;
+
+// count games for Clonk Rage or OpenClonk
+$references = $response->where('Game')->passes(function($field, $value) { return $value === 'Clonk Rage' || $value === 'OpenClonk'; });
+echo count($references);
 ```
 
 ## Game references
