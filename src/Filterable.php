@@ -57,7 +57,7 @@ class Filterable {
 		return !$this->exists($field);
 	}
 	
-	public function passes($field, callable $callable) {
+	public function passes($field, $callable) {
 		$value = null;
 		if(isset($this->fields[$field])) {
 			$value = $this->fields[$field];
@@ -65,7 +65,7 @@ class Filterable {
 		return call_user_func($callable, $field, $value);
 	}
 	
-	public function doesNotPass($field, callable $callable) {
+	public function doesNotPass($field, $callable) {
 		return !$this->passes($field, $callable);
 	}
 
