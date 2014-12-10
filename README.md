@@ -12,7 +12,7 @@ This library is licensed under the MIT license.
 
 Install Sulphur by using [composer](https://getcomposer.org/).
 
-```bash
+```ShellSession
 $ composer require beheh/sulphur
 ```
 
