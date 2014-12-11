@@ -1,5 +1,9 @@
 # Sulphur changelog
 
+## v1.1.2
+
+* Fixed chaining of `where` calls
+
 ## v1.1.1
 
 * Fixed field values sometimes being the wrong datatype
