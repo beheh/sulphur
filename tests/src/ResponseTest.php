@@ -19,7 +19,6 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @covers Sulphur\Response::parse
-	 * @depends testAll
 	 */
 	public function testParse() {
 		$references = $this->response->all();
