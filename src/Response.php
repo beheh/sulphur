@@ -15,7 +15,7 @@ class Response {
 
 	/**
 	 * Parses the passed response and passes the key-value pairs to references.
-	 * @param type $response the response to parse
+	 * @param string $response the response to parse
 	 */
 	protected function parse($response) {
 
@@ -47,7 +47,8 @@ class Response {
 			} else if(preg_match('/^(.*)=(.*)$/', $line, $matches)) {
 				// key-value pair, like "State=Lobby"
 				if(!$heading) {
-					$reference[trim($matches[1])] = $matches[2];
+					$value = self::cast($matches[2]);
+					$reference[trim($matches[1])] = $value;
 				}
 			}
 		}
@@ -79,6 +80,25 @@ class Response {
 	 */
 	public function all() {
 		return $this->where(null);
+	}
+
+	/**
+	 * Casts the value to the correct datatype.
+	 * @param string $value the value to cast
+	 * @return any
+	 */
+	public static function cast($value) {
+		$matches = array();
+		if(strtolower($value) === 'true') {
+			$value = (bool) true;
+		} else if(strtolower($value) === 'false') {
+			$value = (bool) false;
+		} else if(is_numeric($value)) {
+			$value = (int) $value;
+		} else if(preg_match('/^"(.*)"$/', $value, $matches)) {
+			$value = $matches[1];
+		}
+		return $value;
 	}
 
 }

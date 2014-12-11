@@ -18,17 +18,51 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @covers Sulphur\Response::parse
+	 * @depends testAll
+	 */
+	public function testParse() {
+		$references = $this->response->all();
+		$reference = $references[0];
+		$this->assertEquals(12, $reference->Icon);
+		$this->assertEquals('Minor Melee', $reference->Title);
+		$this->assertEquals(true, $reference->IsNetworkGame);
+	}
+
+	/**
 	 * @covers Sulphur\Response::where
 	 */
 	public function testWhere() {
-		$this->assertInstanceOf('Sulphur\FilterableList', $this->response->where('foo'));
+		$where = $this->response->where('foo');
+		$this->assertInstanceOf('Sulphur\FilterableList', $where);
+		$this->assertEquals(1, count($where));
 	}
 
 	/**
 	 * @covers Sulphur\Response::all
 	 */
 	public function testAll() {
-		$this->assertInstanceOf('Sulphur\FilterableList', $this->response->all());
+		$all = $this->response->all();
+		$this->assertInstanceOf('Sulphur\FilterableList', $all);
+		$this->assertEquals(1, count($all));
+	}
+
+	/**
+	 * @covers Sulphur\Response::all
+	 */
+	public function testCast() {
+		$this->assertSame(true, Response::cast('true'));
+		$this->assertSame(true, Response::cast('TRUE'));
+		$this->assertSame(false, Response::cast('false'));
+		$this->assertSame(false, Response::cast('FALSE'));
+		$this->assertSame('String', Response::cast('"String"'));
+		$this->assertSame('true', Response::cast('"true"'));
+		$this->assertSame('TRUE', Response::cast('"TRUE"'));
+		$this->assertSame('false', Response::cast('"false"'));
+		$this->assertSame('FALSE', Response::cast('"FALSE"'));
+		$this->assertSame('42', Response::cast('"42"'));
+		$this->assertSame(42, Response::cast('42'));
+		$this->assertNotSame(42, Response::cast('"42"'));
 	}
 
 }
