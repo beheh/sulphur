@@ -5,7 +5,7 @@
 
 A self-contained library to parse and filter data from the Clonk masterserver protocol, as used in the games Clonk Rage (http://clonk.de) and OpenClonk (http://openclonk.org).
 
-This library is licensed under the MIT license.
+This library is licensed under the ISC license.
 
 
 ## Installing
@@ -91,7 +91,7 @@ $response->where('Title')->doesNotPass(function($field, $value) { return strlen(
 
 ### Chain filtering
 
-You can filter multiple fields by repeating calls to `where`.
+You can filter multiple fields by repeating calls to `where`:
 
 ```php
 $response->where('State')->is('Running')->where('League')->exists();

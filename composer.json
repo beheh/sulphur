@@ -3,11 +3,12 @@
 	"type": "library",
 	"description": "Parse and filter game references from Clonk masterservers",
 	"keywords": ["clonk"],
-	"license": "MIT",
+	"license": "ISC",
 	"authors": [
 		{
 			"name": "Benedict Etzel",
-			"email": "developer@beheh.de"
+			"email": "developer@beheh.de",
+			"homepage": "https://beheh.de"
 		}
 	],
 	"require": {
