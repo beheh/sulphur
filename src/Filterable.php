@@ -9,7 +9,7 @@ class Filterable {
 
 	protected $fields;
 
-	public function __construct($fields) {
+	public function __construct($fields = array()) {
 		$this->fields = $fields;
 	}
 
@@ -56,7 +56,7 @@ class Filterable {
 	public function doesNotExist($field) {
 		return !$this->exists($field);
 	}
-	
+
 	public function passes($field, $callable) {
 		$value = null;
 		if(isset($this->fields[$field])) {
@@ -64,7 +64,7 @@ class Filterable {
 		}
 		return call_user_func($callable, $field, $value);
 	}
-	
+
 	public function doesNotPass($field, $callable) {
 		return !$this->passes($field, $callable);
 	}
@@ -73,6 +73,10 @@ class Filterable {
 		if(isset($this->fields[$name])) {
 			return $this->fields[$name];
 		}
+	}
+
+	public function __set($name, $value) {
+		$this->fields[$name] = $value;
 	}
 
 }

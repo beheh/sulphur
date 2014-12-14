@@ -23,6 +23,8 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(12, $reference->Icon);
 		$this->assertEquals('Minor Melee', $reference->Title);
 		$this->assertEquals(true, $reference->IsNetworkGame);
+		$this->assertEquals(123456, $reference->GameId);
+		$this->assertNull($reference->Type);
 	}
 
 	/**

@@ -7,11 +7,13 @@ namespace Sulphur;
  */
 class Response {
 
-	protected $references = array();
+	protected $sections = array();
 
 	public function __construct($response) {
 		$this->parse($response);
 	}
+
+	protected $stack = array();
 
 	/**
 	 * Parses the passed response and passes the key-value pairs to references.
@@ -25,8 +27,6 @@ class Response {
 
 		$lines = explode("\n", $response);
 
-		$reference = null;
-		$heading = true;
 		foreach($lines as $line) {
 			if(!$line) {
 				continue;
@@ -34,35 +34,41 @@ class Response {
 			$matches = array();
 			if(preg_match('/^(\s)*\[(.*)\]$/', $line, $matches)) {
 				$depth = strlen($matches[1]);
-				// heading, like "[Reference]"
-				switch($matches[2]) {
-					case 'Reference':
-						$heading = false;
-						if(!empty($reference)) {
-							$this->addReference($reference);
-						}
-						$reference = array();
-						break;
+				if(isset($this->stack[$depth])) {
+					// find parent
+					$this->addSection($depth);
 				}
-			} else if(preg_match('/^(.*)=(.*)$/', $line, $matches)) {
-				// key-value pair, like "State=Lobby"
-				if(!$heading) {
-					$value = self::cast($matches[2]);
-					$reference[trim($matches[1])] = $value;
+				$this->stack[$depth] = new Section($matches[2]);
+			} else if(preg_match('/^(\s)*(.*)=(.*)$/', $line, $matches)) {
+				$depth = strlen($matches[1]);
+				if(isset($this->stack[$depth])) {
+					$section = $this->stack[$depth];
+					$section->__set($matches[2], self::cast($matches[3]));
 				}
 			}
 		}
-		if(!empty($reference) && $reference !== null) {
-			$this->addReference($reference);
+		// children have to found before parents
+		krsort($this->stack);
+		// merge remaining children into parents
+		foreach($this->stack as $depth => $section) {
+			$this->addSection($depth);
 		}
 	}
 
-	/**
-	 * Adds a new Filterable to the references array.
-	 * @param array $fields the fields to build the Filterable from
-	 */
-	protected function addReference($fields) {
-		$this->references[] = new Filterable($fields);
+	protected function addSection($depth) {
+		$section = $this->stack[$depth];
+		// find parent
+		$found = false;
+		for($i = $depth - 1; $i >= 0; $i--) {
+			if(isset($this->stack[$i])) {
+				//@todo merge subsection into root section
+				$found = true;
+				break;
+			}
+		}
+		if(!$found) {
+			$this->sections[] = $section;
+		}
 	}
 
 	/**
@@ -70,8 +76,12 @@ class Response {
 	 * @param string $field the field to filter on
 	 * @return FilterableList
 	 */
-	public function where($field) {
-		return new FilterableList($this->references, $field);
+	public function where($field, $section = 'Reference') {
+		// array_values reindexes the array here, otherwise we have gaps from non-matching array keys
+		return new FilterableList(array_values(array_filter($this->sections, function($val) use ($section) {
+					// only return matching root sections
+					return $val->getHeading() == $section;
+				})), $field);
 	}
 
 	/**
