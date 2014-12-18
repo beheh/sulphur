@@ -32,14 +32,15 @@ class Response {
 				continue;
 			}
 			$matches = array();
-			if(preg_match('/^(\s)*\[(.*)\]$/', $line, $matches)) {
+			if(preg_match('/^(\s*)\[(.*)\]$/', $line, $matches)) {
 				$depth = strlen($matches[1]);
 				if(isset($this->stack[$depth])) {
-					// find parent
+					// found previous section at depth of current (new) section
+					// save existing section
 					$this->addSection($depth);
 				}
 				$this->stack[$depth] = new Section($matches[2]);
-			} else if(preg_match('/^(\s)*(.*)=(.*)$/', $line, $matches)) {
+			} else if(preg_match('/^(\s*)(.*)=(.*)$/', $line, $matches)) {
 				$depth = strlen($matches[1]);
 				if(isset($this->stack[$depth])) {
 					$section = $this->stack[$depth];
@@ -55,33 +56,38 @@ class Response {
 		}
 	}
 
+	/**
+	 * Add a section reference either to the root or parent section depending on the depth
+	 * @param int $depth
+	 */
 	protected function addSection($depth) {
 		$section = $this->stack[$depth];
 		// find parent
 		$found = false;
 		for($i = $depth - 1; $i >= 0; $i--) {
 			if(isset($this->stack[$i])) {
-				//@todo merge subsection into root section
+				$this->stack[$i]->addSubsection($section);
 				$found = true;
 				break;
 			}
 		}
 		if(!$found) {
+			// root sections
 			$this->sections[] = $section;
 		}
 	}
 
 	/**
 	 * Sets the field for the first filter.
-	 * @param string $field the field to filter on
+	 * @param string $field the field to filter
 	 * @return FilterableList
 	 */
 	public function where($field, $section = 'Reference') {
 		// array_values reindexes the array here, otherwise we have gaps from non-matching array keys
 		return new FilterableList(array_values(array_filter($this->sections, function($val) use ($section) {
-					// only return matching root sections
-					return $val->getHeading() == $section;
-				})), $field);
+							// only return matching root sections
+							return $val->getHeading() == $section;
+						})), $field);
 	}
 
 	/**

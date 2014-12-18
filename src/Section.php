@@ -18,11 +18,17 @@ class Section extends Filterable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getHeading() {
 		return $this->heading;
+	}
+
+	protected $subsections = array();
+
+	public function addSubsection(Section $section) {
+		$this->subsections[] = $section;
 	}
 
 }
