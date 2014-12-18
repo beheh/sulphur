@@ -39,7 +39,7 @@ class FilterableListTest extends \PHPUnit_Framework_TestCase {
 	 * @covers Sulphur\FilterableList::getIterator
 	 */
 	public function testGetIterator() {
-		$this->isInstanceOf('\Traversable', $this->list->getIterator());
+		$this->assertInstanceOf('\Traversable', $this->list->getIterator());
 	}
 
 	/**
