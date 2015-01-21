@@ -17,7 +17,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase {
 	 * @covers Sulphur\Response::parse
 	 */
 	public function testParse() {
-		$response = $this->parser->parse(file_get_contents(__DIR__.'/data/reference.ini'));
+		$response = $this->parser->parse(file_get_contents(__DIR__.'/../data/reference.ini'));
 		$references = $response->all();
 		$reference = $references[0];
 		$this->assertEquals(12, $reference->Icon);
