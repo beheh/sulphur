@@ -1,6 +1,6 @@
 # Sulphur
 
-[![Build Status](https://travis-ci.org/beheh/sulphur.svg?branch=master)](https://travis-ci.org/beheh/sulphur)
+[![Build Status](https://travis-ci.org/beheh/sulphur.svg?branch=stable)](https://travis-ci.org/beheh/sulphur)
 [![License](https://img.shields.io/packagist/l/beheh/sulphur.svg)](https://packagist.org/packages/beheh/sulphur)
 
 A full library to parse and filter data from the Clonk masterserver protocol, as used in the games Clonk Rage (http://clonk.de) and OpenClonk (http://openclonk.org).
@@ -107,7 +107,7 @@ $response->where('Title')->passes(function($field, $value) { return strlen($valu
 $response->where('Title')->doesNotPass(function($field, $value) { return strlen($value) <= 3; });
 ```
 
-### Chain filtering
+#### Chain filtering
 
 You can filter multiple fields by repeating calls to `where`:
 
