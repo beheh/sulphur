@@ -32,8 +32,16 @@ class ExampleTest extends \PHPUnit_Framework_TestCase {
 							return $value === 'Clonk Rage';
 						})));
 	}
-
-	public function testPlayerNames() {
+	
+	public function testSubsections() {
+		$resources = array();
+		foreach($this->response->first('Reference')->all('Resource') as $resource) {
+			$resources[] = $resource->Filename;
+		}
+		$this->assertEquals(array('Objects.c4d', 'Melees.c4f', 'System.c4g', 'Material.c4g'), $resources);
+	}
+	
+	public function testMultipleSubsections() {
 		$players = array();
 		foreach($this->response->first('Reference')->first('PlayerInfos')->all('Client') as $client) {
 			foreach($client->all('Player') as $player) {
