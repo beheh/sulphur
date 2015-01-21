@@ -33,6 +33,7 @@ class FilterableListTest extends \PHPUnit_Framework_TestCase {
 	public function testWhere() {
 		$this->assertEquals(2, count($this->list->where('Title')->is('Minor Melee')));
 		$this->assertEquals(1, count($this->list->where('Title')->is('Minor Melee')->where('League')->is(true)));
+		$this->assertEquals(0, count($this->list->where('State')->is('Running')->where('League')->exists()));
 	}
 
 	/**

@@ -20,11 +20,11 @@ class FilterableList implements \IteratorAggregate, \ArrayAccess, \Countable {
 		if(!$this->field) {
 			return;
 		}
+		$result = array();
 		// only if elements are remaining
 		if(!empty($this->elements)) {
 			// prepend field to filter arguments
 			array_unshift($arguments, $this->field);
-			$result = array();
 			foreach($this->elements as $element) {
 				// apply filter to all elements
 				if(call_user_func_array(array($element, $name), $arguments)) {
