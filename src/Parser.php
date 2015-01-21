@@ -31,11 +31,8 @@ class Parser {
 			if(preg_match('/^(\s*)\[(.*)\]$/', $line, $matches)) {
 				// entering new section
 				$depth = strlen($matches[1]);
-				if(isset($this->stack[$depth])) {
-					// found previous section at depth of current (new) section
-					// save existing section
-					$this->completeSection($response, $depth);
-				}
+				// merge all lower sections
+				$this->completeSection($response, $depth);
 				$this->stack[$depth] = new Section($matches[2]);
 			} else if(preg_match('/^(\s*)(.*)=(.*)$/', $line, $matches)) {
 				$depth = strlen($matches[1]);
@@ -45,30 +42,32 @@ class Parser {
 				}
 			}
 		}
-		// children have to found before parents
-		krsort($this->stack);
 		// merge remaining children into parents
-		foreach($this->stack as $depth => $section) {
-			$this->completeSection($response, $depth);
-		}
+		$this->completeSection($response, 0);
 		
 		return $response;
 	}
 	
-	protected function completeSection(Response $response, $depth) {
-		$section = $this->stack[$depth];
-		// find parent
-		$found = false;
-		for($i = $depth - 1; $i >= 0; $i--) {
-			if(isset($this->stack[$i])) {
-				$this->stack[$i]->addSubsection($section);
-				$found = true;
-				break;
+	protected function completeSection(Response $response, $mindepth) {
+		krsort($this->stack, SORT_NUMERIC);
+		// merge all sections in depths >= mindepth
+		$merge = null;
+		foreach($this->stack as $depth => $section) {
+			if($merge) {
+				$section->addSubsection($merge);
+				$merge = null;
 			}
+			if($depth < $mindepth) {
+				continue;
+			}
+			$merge = $section;
+			unset($this->stack[$depth]);
 		}
-		if(!$found) {
-			// root sections
-			$response->addSection($section);
+		if($merge) {
+			if($mindepth != null) {
+				throw new \Exception('found child ('.$merge->getHeading().') without parent at depth '.$mindepth);
+			}
+			$response->addSection($merge);
 		}
 	}
 
