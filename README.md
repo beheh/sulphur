@@ -46,7 +46,7 @@ echo count($references);
 
 // print all players in a reference
 foreach($reference->first('PlayerInfos')->all('Client') as $client) {
-	foreach($client->all('Player') as $player) [
+	foreach($client->all('Player') as $player) {
 		echo $player->Name;
 	}
 }
