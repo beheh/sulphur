@@ -5,7 +5,7 @@
 
 A self-contained library to parse and filter data from the Clonk masterserver protocol, as used in the games Clonk Rage (http://clonk.de) and OpenClonk (http://openclonk.org).
 
-This library is licensed under the ISC license.
+This library was created by Benedict Etzel <developer@beheh.de> and is licensed under the ISC license.
 
 
 ## Installing
@@ -24,7 +24,7 @@ $parser = new Sulphur\Parser();
 $response = $parser->parse(file_get_contents('example.com:80'));
 
 // count all running games
-echo count($response->where('State')->is('Running')).' game(s) are currently running.';
+echo count($response->where('State')->is('Running')).' game(s) are currently running';
 
 // iterate through all games currently in lobby
 foreach($response->where('State')->is('Lobby') as $reference) {
@@ -42,9 +42,9 @@ echo $references[0]->Title;
 
 // count games for Clonk Rage or OpenClonk
 $references = $response->where('Game')->passes(function($field, $value) { return $value === 'Clonk Rage' || $value === 'OpenClonk'; });
-echo count($references);
+echo count($references).' Clonk Rage and OpenClonk games open';
 
-// print all players in a reference
+// print all player names in a reference
 foreach($reference->first('PlayerInfos')->all('Client') as $client) {
 	foreach($client->all('Player') as $player) {
 		echo $player->Name;
@@ -64,6 +64,7 @@ the reference object:
 ```php
 $references = $response->all();
 $references = $response->where('Title')->is('Clepal');
+$reference = $response->first('Reference'); // or $response->first()
 ```
 
 The calls return an object which should handle like an array.
@@ -97,13 +98,6 @@ $response->where('Title')->passes(function($field, $value) { return strlen($valu
 $response->where('Title')->doesNotPass(function($field, $value) { return strlen($value) <= 3; });
 ```
 
-Filtering can be limited to certain subfields:
-
-```php
-$response->where('Name')->anywhere()->is('B_E');
-$response->where('Name')->inSection('Player')->is('B_E');
-```
-
 ### Chain filtering
 
 You can filter multiple fields by repeating calls to `where`:
@@ -115,21 +109,20 @@ $response->where('State')->is('Lobby')->where('Password')->doesNotExist();
 
 ### Fields
 
-Fields can be read simply by accessing the corresponding local variables (case-sensitive!).
+Fields can be read simply by accessing the corresponding local variables (case-sensitive):
 
 ```php
-$reference->Title;
-$reference->Game;
+echo $reference->Title;
+echo $reference->Game;
 ```
 
-To access specific a specific section, use ```all``` to get an array of all sections with that name.
-You can alternatively use ```first``` to access the first section with that name.
+### Subsections
+
+To access fields in a specific section you can use the `all` and `first` methods:
 
 ```php
-$reference->first('PlayerInfos')->first('Client')->first('Player')->Name
-foreach($reference->first('PlayerInfos')->all('Client') as $client) {
-	foreach($client->all('Player') as $player) [
-		echo $player->Name;
-	}
+echo $reference->first('PlayerInfos')->first('Client')->first('Player')->Name;
+foreach($reference->all('Resource') as $resource) {
+	echo $resource->Filename;
 }
 ```
