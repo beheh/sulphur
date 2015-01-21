@@ -6,6 +6,6 @@ if(is_dir(__DIR__.'/../src/')) {
 
 require_once 'Filterable.php';
 require_once 'FilterableList.php';
+require_once 'Parser.php';
 require_once 'Response.php';
-require_once 'ResponseFactory.php';
 require_once 'Section.php';

@@ -20,7 +20,8 @@ $ composer require beheh/sulphur
 
 ```php
 // fetch masterserver response
-$response = Sulphur\ResponseFactory::fromUrl('example.com:80');
+$parser = new Sulphur\Parser();
+$response = $parser->parse(file_get_contents('example.com:80'));
 
 // count all running games
 echo count($response->where('State')->is('Running')).' game(s) are currently running.';
