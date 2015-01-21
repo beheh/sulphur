@@ -32,9 +32,9 @@ class Response {
 		}
 		// array_values reindexes the array here, otherwise we have gaps from non-matching array keys
 		return new FilterableList(array_values(array_filter($this->sections, function($val) use ($section) {
-							// only return matching root sections
-							return $val->getHeading() == $section;
-						})), $field);
+			// only return matching root sections
+			return $val->getHeading() == $section;
+		})), $field);
 	}
 
 	public function first($heading = 'Reference') {

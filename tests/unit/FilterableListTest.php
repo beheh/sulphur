@@ -27,7 +27,6 @@ class FilterableListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @depends test__call
 	 * @covers Sulphur\FilterableList::where
 	 */
 	public function testWhere() {

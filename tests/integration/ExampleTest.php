@@ -29,10 +29,10 @@ class ExampleTest extends \PHPUnit_Framework_TestCase {
 
 	public function testClosure() {
 		$this->assertEquals(1, count($this->response->where('Game')->passes(function($field, $value) {
-							return $value === 'Clonk Rage';
-						})));
+			return $value === 'Clonk Rage';
+		})));
 	}
-	
+
 	public function testSubsections() {
 		$resources = array();
 		foreach($this->response->first('Reference')->all('Resource') as $resource) {
@@ -40,7 +40,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase {
 		}
 		$this->assertEquals(array('Objects.c4d', 'Melees.c4f', 'System.c4g', 'Material.c4g'), $resources);
 	}
-	
+
 	public function testMultipleSubsections() {
 		$players = array();
 		foreach($this->response->first('Reference')->first('PlayerInfos')->all('Client') as $client) {
