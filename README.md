@@ -3,10 +3,9 @@
 [![Build Status](https://travis-ci.org/beheh/sulphur.svg?branch=master)](https://travis-ci.org/beheh/sulphur)
 [![License](https://img.shields.io/packagist/l/beheh/sulphur.svg)](https://packagist.org/packages/beheh/sulphur)
 
-A self-contained library to parse and filter data from the Clonk masterserver protocol, as used in the games Clonk Rage (http://clonk.de) and OpenClonk (http://openclonk.org).
+A full library to parse and filter data from the Clonk masterserver protocol, as used in the games Clonk Rage (http://clonk.de) and OpenClonk (http://openclonk.org).
 
-This library was created by Benedict Etzel <developer@beheh.de> and is licensed under the ISC license.
-
+This library was created by Benedict Etzel (developer@beheh.de) and is licensed under the ISC license.
 
 ## Installing
 
@@ -16,7 +15,7 @@ Install Sulphur by using [composer](https://getcomposer.org/).
 $ composer require beheh/sulphur
 ```
 
-## Basic usage
+## Examples
 
 ```php
 // fetch masterserver response
@@ -52,14 +51,24 @@ foreach($reference->first('PlayerInfos')->all('Client') as $client) {
 }
 ```
 
+## Basic usage
+
+You can access the master data by using the parser and passing masterserver data.
+
+```php
+$parser = new Sulphur\Parser();
+$response = $parser->parse($data);
+```
+
+It's recommended to cache this data so the masterserver doesn't blacklist your server.
+
 ## Game references
 
 Game sessions are tracked as game references. They can have a variety of fields which describe something about the game.
 
 ### Access
 
-To access references, simply call the corresponding functions in
-the reference object:
+To access references, simply call the corresponding functions in the reference object:
 
 ```php
 $references = $response->all();
