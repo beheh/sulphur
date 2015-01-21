@@ -10,12 +10,37 @@ class FilterableList implements \IteratorAggregate, \ArrayAccess, \Countable {
 	protected $elements;
 	protected $field;
 
+	/**
+	 * @param array $elements
+	 * @param null|string $field
+	 * @throws \InvalidArgumentException
+	 */
 	public function __construct($elements, $field) {
+		if(!is_array($elements)) {
+			throw new \InvalidArgumentException('expected array for parameter $elements (was given '.gettype($elements).')');
+		}
+		if(!is_string($field) && !is_null($field)) {
+			throw new \InvalidArgumentException('expected string or null for parameter $field (was given '.gettype($field).')');
+		}
+
 		$this->elements = $elements;
 		$this->field = $field;
 	}
 
+	/**
+	 * @param string $name
+	 * @param array $arguments
+	 * @return \Sulphur\FilterableList
+	 * @throws \InvalidArgumentException
+	 */
 	public function __call($name, $arguments) {
+		if(!is_string($name)) {
+			throw new \InvalidArgumentException('expected string for parameter $name (was given '.gettype($name).')');
+		}
+		if(!is_array($arguments)) {
+			throw new \InvalidArgumentException('expected array for parameter $arguments (was given '.gettype($arguments).')');
+		}
+
 		// only defer filters if a field is defined
 		if(!$this->field) {
 			return;
