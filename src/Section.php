@@ -45,13 +45,23 @@ class Section extends Filterable {
 	public function addSubsection(Section $section) {
 		$this->subsections[] = $section;
 	}
-
-	/**
-	 * Returns the child sections.
-	 * @return array the subsections
-	 */
-	public function getSubsections() {
-		return $this->subsections;
+	
+	public function all($heading = null) {
+		$sections = array();
+		foreach($this->subsections as $section) {
+			if($section->getHeading() === $heading || $heading === null) {
+				$sections[] = $section;
+			}
+		}
+		return $sections;
+	}
+	
+	public function first($heading = null) {
+		$sections = $this->all($heading);
+		if(count($sections)) {
+			return $sections[0];
+		}
+		return null;
 	}
 
 }

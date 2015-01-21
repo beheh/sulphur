@@ -43,6 +43,13 @@ echo $references[0]->Title;
 // count games for Clonk Rage or OpenClonk
 $references = $response->where('Game')->passes(function($field, $value) { return $value === 'Clonk Rage' || $value === 'OpenClonk'; });
 echo count($references);
+
+// print all players in a reference
+foreach($reference->first('PlayerInfos')->all('Client') as $client) {
+	foreach($client->all('Player') as $player) [
+		echo $player->Name;
+	}
+}
 ```
 
 ## Game references
@@ -90,6 +97,13 @@ $response->where('Title')->passes(function($field, $value) { return strlen($valu
 $response->where('Title')->doesNotPass(function($field, $value) { return strlen($value) <= 3; });
 ```
 
+Filtering can be limited to certain subfields:
+
+```php
+$response->where('Name')->anywhere()->is('B_E');
+$response->where('Name')->inSection('Player')->is('B_E');
+```
+
 ### Chain filtering
 
 You can filter multiple fields by repeating calls to `where`:
@@ -106,4 +120,16 @@ Fields can be read simply by accessing the corresponding local variables (case-s
 ```php
 $reference->Title;
 $reference->Game;
+```
+
+To access specific a specific section, use ```all``` to get an array of all sections with that name.
+You can alternatively use ```first``` to access the first section with that name.
+
+```php
+$reference->first('PlayerInfos')->first('Client')->first('Player')->Name
+foreach($reference->first('PlayerInfos')->all('Client') as $client) {
+	foreach($client->all('Player') as $player) [
+		echo $player->Name;
+	}
+}
 ```
