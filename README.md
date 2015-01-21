@@ -118,14 +118,14 @@ $response->where('State')->is('Lobby')->where('Password')->doesNotExist();
 
 ### Fields
 
-Fields can be read simply by accessing the corresponding local variables (case-sensitive):
+Fields are key-value pairs and can be read simply by accessing the corresponding (case-sensitive) local variables:
 
 ```php
 echo $reference->Title;
 echo $reference->Game;
 ```
 
-### Subsections
+#### Subsections
 
 To access fields in a specific section you can use the `all` and `first` methods:
 
