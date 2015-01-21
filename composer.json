@@ -2,7 +2,7 @@
 	"name": "beheh/sulphur",
 	"type": "library",
 	"description": "Parse and filter game references from Clonk masterservers",
-	"keywords": ["clonk"],
+	"keywords": ["clonk", "openclonk", "masterserver"],
 	"license": "ISC",
 	"authors": [
 		{
@@ -13,9 +13,6 @@
 	],
 	"require": {
 		"php": ">=5.3.0"
-	},
-	"suggest": {
-		"ext-curl": "Allows the usage of ResponseFactory::fromUrl"
 	},
 	"autoload": {
 		"psr-4": {
