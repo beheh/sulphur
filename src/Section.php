@@ -45,7 +45,7 @@ class Section extends Filterable {
 	public function addSubsection(Section $section) {
 		$this->subsections[] = $section;
 	}
-	
+
 	public function all($heading = null) {
 		$sections = array();
 		foreach($this->subsections as $section) {
@@ -55,7 +55,7 @@ class Section extends Filterable {
 		}
 		return $sections;
 	}
-	
+
 	public function first($heading = null) {
 		$sections = $this->all($heading);
 		if(count($sections)) {

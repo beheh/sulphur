@@ -29,8 +29,8 @@ class ExampleTest extends \PHPUnit_Framework_TestCase {
 
 	public function testClosure() {
 		$this->assertEquals(1, count($this->response->where('Game')->passes(function($field, $value) {
-			return $value === 'Clonk Rage';
-		})));
+							return $value === 'Clonk Rage';
+						})));
 	}
 
 	public function testSubsections() {
