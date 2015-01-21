@@ -26,6 +26,10 @@ class Response {
 	 * @return FilterableList
 	 */
 	public function where($field, $section = 'Reference') {
+		// default to reference
+		if($section === null) {
+			$section = 'Reference';
+		}
 		// array_values reindexes the array here, otherwise we have gaps from non-matching array keys
 		return new FilterableList(array_values(array_filter($this->sections, function($val) use ($section) {
 							// only return matching root sections
@@ -33,12 +37,20 @@ class Response {
 						})), $field);
 	}
 
+	public function first($heading = 'Reference') {
+		$references = $this->all($heading);
+		if(count($references)) {
+			return $references[0];
+		}
+		return null;
+	}
+
 	/**
 	 * Returns all references.
 	 * @return FilterableList
 	 */
-	public function all() {
-		return $this->where(null);
+	public function all($heading = null) {
+		return $this->where(null, $heading);
 	}
 
 }
