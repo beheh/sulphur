@@ -1,7 +1,4 @@
-# Sulphur
-
-[![Build Status](https://travis-ci.org/beheh/sulphur.svg?branch=stable)](https://travis-ci.org/beheh/sulphur)
-[![License](https://img.shields.io/packagist/l/beheh/sulphur.svg)](https://packagist.org/packages/beheh/sulphur)
+# Sulphur [![Packagist](https://img.shields.io/packagist/v/beheh/sulphur.svg?style=flat-square)](https://packagist.org/packages/beheh/sulphur) [![License](https://img.shields.io/packagist/l/beheh/sulphur.svg?style=flat-square)](https://packagist.org/packages/beheh/sulphur) [![Travis](https://img.shields.io/travis/beheh/sulphur/stable.svg?style=flat-square)](https://travis-ci.org/beheh/sulphur)
 
 A full library to parse and filter data from the Clonk masterserver protocol, as used in the games Clonk Rage (http://clonk.de) and OpenClonk (http://openclonk.org).
 
