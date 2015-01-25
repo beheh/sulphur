@@ -8,3 +8,4 @@ php:
 script:
   - cd tests
   - phpunit .
+  
