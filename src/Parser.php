@@ -64,7 +64,7 @@ class Parser {
 			unset($this->stack[$depth]);
 		}
 		if($merge) {
-			if($mindepth != null) {
+			if($mindepth !== null) {
 				throw new \Exception('found child ('.$merge->getHeading().') without parent at depth '.$mindepth);
 			}
 			$response->addSection($merge);
