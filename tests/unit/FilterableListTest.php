@@ -1,6 +1,6 @@
 <?php
 
-namespace Sulphur;
+namespace BehEh\Sulphur;
 
 class FilterableListTest extends \PHPUnit_Framework_TestCase {
 
@@ -61,7 +61,7 @@ class FilterableListTest extends \PHPUnit_Framework_TestCase {
 	 * @covers Sulphur\FilterableList::offsetGet
 	 */
 	public function testOffsetGet() {
-		$this->assertInstanceOf('Sulphur\Filterable', $this->list->offsetGet(0));
+		$this->assertInstanceOf('BehEh\Sulphur\Filterable', $this->list->offsetGet(0));
 	}
 
 }

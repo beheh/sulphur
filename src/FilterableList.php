@@ -1,6 +1,6 @@
 <?php
 
-namespace Sulphur;
+namespace BehEh\Sulphur;
 
 /**
  * @author Benedict Etzel <developer@beheh.de>

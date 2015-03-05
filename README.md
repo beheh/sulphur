@@ -16,7 +16,7 @@ $ composer require beheh/sulphur
 
 ```php
 // fetch masterserver response
-$parser = new Sulphur\Parser();
+$parser = new BehEh\Sulphur\Parser();
 $response = $parser->parse(file_get_contents('example.com:80'));
 
 // count all running games
@@ -53,7 +53,9 @@ foreach($reference->first('PlayerInfos')->all('Client') as $client) {
 You can access the master data by using the parser and passing masterserver data.
 
 ```php
-$parser = new Sulphur\Parser();
+use BehEh\Sulphur\Parser;
+
+$parser = new Parser();
 $response = $parser->parse($data);
 ```
 

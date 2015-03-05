@@ -16,7 +16,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Sulphur\\": "src/"
+			"BehEh\\Sulphur\\": "src/"
 		}
 	}
 }

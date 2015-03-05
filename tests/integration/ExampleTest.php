@@ -1,6 +1,6 @@
 <?php
 
-namespace Sulphur;
+namespace BehEh\Sulphur;
 
 class ExampleTest extends \PHPUnit_Framework_TestCase {
 

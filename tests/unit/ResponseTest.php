@@ -1,6 +1,6 @@
 <?php
 
-namespace Sulphur;
+namespace BehEh\Sulphur;
 
 class ResponseTest extends \PHPUnit_Framework_TestCase {
 
@@ -18,7 +18,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testWhere() {
 		$where = $this->response->where('foo');
-		$this->assertInstanceOf('Sulphur\FilterableList', $where);
+		$this->assertInstanceOf('BehEh\Sulphur\FilterableList', $where);
 		$this->assertEquals(0, count($where));
 	}
 
@@ -27,7 +27,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testAll() {
 		$all = $this->response->all();
-		$this->assertInstanceOf('Sulphur\FilterableList', $all);
+		$this->assertInstanceOf('BehEh\Sulphur\FilterableList', $all);
 		$this->assertEquals(0, count($all));
 	}
 
