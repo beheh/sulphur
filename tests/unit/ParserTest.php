@@ -14,7 +14,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Parser::parse
+	 * @covers BehEh\Sulphur\Parser::parse
 	 */
 	public function testParse() {
 		$response = $this->parser->parse(file_get_contents(__DIR__.'/../data/reference.ini'));
@@ -28,7 +28,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Parser::cast
+	 * @covers BehEh\Sulphur\Parser::cast
 	 */
 	public function testCast() {
 		$this->assertSame(true, Parser::cast('true'));

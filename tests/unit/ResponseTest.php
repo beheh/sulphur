@@ -14,7 +14,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Response::where
+	 * @covers BehEh\Sulphur\Response::where
 	 */
 	public function testWhere() {
 		$where = $this->response->where('foo');
@@ -23,7 +23,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Response::all
+	 * @covers BehEh\Sulphur\Response::all
 	 */
 	public function testAll() {
 		$all = $this->response->all();

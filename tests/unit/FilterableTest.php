@@ -18,7 +18,7 @@ class FilterableTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Filterable::is
+	 * @covers BehEh\Sulphur\Filterable::is
 	 */
 	public function testIs() {
 		$this->assertTrue($this->filterable->is('Icon', 12));
@@ -28,7 +28,7 @@ class FilterableTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Filterable::isNot
+	 * @covers BehEh\Sulphur\Filterable::isNot
 	 */
 	public function testIsNot() {
 		$this->assertTrue($this->filterable->isNot('Icon', 42));
@@ -38,7 +38,7 @@ class FilterableTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Filterable::contains
+	 * @covers BehEh\Sulphur\Filterable::contains
 	 */
 	public function testContains() {
 		$this->assertTrue($this->filterable->contains('Title', 'Minor'));
@@ -48,7 +48,7 @@ class FilterableTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Filterable::doesNotContain
+	 * @covers BehEh\Sulphur\Filterable::doesNotContain
 	 */
 	public function testDoesNotContain() {
 		$this->assertTrue($this->filterable->doesNotContain('Title', 'minor'));
@@ -58,7 +58,7 @@ class FilterableTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Filterable::matches
+	 * @covers BehEh\Sulphur\Filterable::matches
 	 */
 	public function testMatches() {
 		$this->assertTrue($this->filterable->matches('Icon', '/^[0-9]+$/'));
@@ -72,7 +72,7 @@ class FilterableTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Filterable::doesNotMatch
+	 * @covers BehEh\Sulphur\Filterable::doesNotMatch
 	 */
 	public function testDoesNotMatch() {
 		$this->assertTrue($this->filterable->doesNotMatch('Icon', '/[a-z]/'));
@@ -86,7 +86,7 @@ class FilterableTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Filterable::exists
+	 * @covers BehEh\Sulphur\Filterable::exists
 	 */
 	public function testExists() {
 		$this->assertTrue($this->filterable->exists('Icon'));
@@ -99,7 +99,7 @@ class FilterableTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Filterable::doesNotExist
+	 * @covers BehEh\Sulphur\Filterable::doesNotExist
 	 */
 	public function testDoesNotExist() {
 		$this->assertTrue($this->filterable->doesNotExist('icon'));
@@ -112,7 +112,7 @@ class FilterableTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Filterable::passes
+	 * @covers BehEh\Sulphur\Filterable::passes
 	 */
 	public function testPasses() {
 		$this->assertTrue($this->filterable->passes('Title', function($field, $value) { return strlen($value) > 5; }));
@@ -126,7 +126,7 @@ class FilterableTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Filterable::doesNotPass
+	 * @covers BehEh\Sulphur\Filterable::doesNotPass
 	 */
 	public function testDoesNotPass() {
 		$this->assertTrue($this->filterable->doesNotPass('Title', function($field, $value) { return strlen($value) <= 3; }));
@@ -140,7 +140,7 @@ class FilterableTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers Sulphur\Filterable::__get
+	 * @covers BehEh\Sulphur\Filterable::__get
 	 */
 	public function test__get() {
 		$this->assertEquals(12, $this->filterable->Icon);
