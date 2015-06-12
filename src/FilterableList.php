@@ -7,8 +7,8 @@ namespace BehEh\Sulphur;
  */
 class FilterableList implements \IteratorAggregate, \ArrayAccess, \Countable {
 
-	protected $elements;
-	protected $field;
+	protected $elements = array();
+	protected $field = null;
 
 	/**
 	 * @param array $elements
@@ -42,7 +42,7 @@ class FilterableList implements \IteratorAggregate, \ArrayAccess, \Countable {
 		}
 
 		// only defer filters if a field is defined
-		if(!$this->field) {
+		if($this->field === null) {
 			return;
 		}
 		$result = array();
