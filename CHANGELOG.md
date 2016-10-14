@@ -1,6 +1,6 @@
 # Sulphur changelog
 
-## Unreleased
+## 3.0.0
 
 * Support PHP 7 and HHVM
 * Switch to X.X.X releases (instead of vX.X.X)
