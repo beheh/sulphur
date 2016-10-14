@@ -1,5 +1,15 @@
 # Sulphur changelog
 
+## Unreleased
+
+* Support PHP 7 and HHVM
+* Switch to X.X.X releases (instead of vX.X.X)
+* Various small cleanups
+
+## v2.0.1
+
+* Various miscellaneous fixes
+
 ## v2.0.0
 
 This is a major release due to breaking changes.
